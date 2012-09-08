@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>db.js specs</title>
+        <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="node_modules/mocha/mocha.js"></script>
+        <script src="node_modules/chai/chai.js"></script>
+        <script src="node_modules/sinon/lib/sinon.js"></script>
+        <script src="node_modules/sinon/lib/sinon/spy.js"></script>
+        <script>
+            mocha.setup('bdd');
+        </script>
+        <script src="db.js"></script>
+        <script src="specs.js"></script>
+        <script>
+            $(function() {
+                window.expect = chai.expect;
+                mocha.run();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="mocha"></div>
+    </body>
+</html>

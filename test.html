@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>
+            <button id="deleteDatabase">Delete Database</button>
+        </p>
+
+        <p>
+            Key: <input id="key" value="1" />
+            Name: <input id="name" value="Alice" />
+            <button id="putRecord">Put Record</button>
+            <button id="getRecord">Get Record</button>
+            <button id="deleteRecord">Delete Record</button>
+        </p>
+
+        <p>
+            <button id="getAllRecords">Get All Records</button>
+        </p>
+
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="db.js"></script>
+        <script>
+            $(function() {
+                var db = new DB('myDB', {
+                    version: 2,
+                    stores: {
+                        myStore: {
+                            indexes: {
+                                byName: {
+                                    keyPath: 'name'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                $('#deleteDatabase').click(function() {
+                    db.delete();
+                });
+
+                $('#putRecord').click(function() {
+                    db.myStore.put(getValue(), getKey());
+                });
+
+                $('#getRecord').click(function() {
+                    db.myStore.get(getKey(), function(value) {
+                        console.log(value);
+                    });
+                });
+
+                $('#getAllRecords').click(function() {
+                    db.myStore.getAll();
+                });
+
+                function getKey() {
+                    var key = $('#key').val();
+                    if (isFinite(+key)) {
+                        key = +key;
+                    }
+                    return key;
+                }
+
+                function getValue() {
+                    return {
+                        name: $('#name').val()
+                    };
+                }
+            });
+        </script>
+    </body>
+</html>
